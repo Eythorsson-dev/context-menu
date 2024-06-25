@@ -5,7 +5,7 @@ import { ContextMenuDivider } from "./contextMenuDivider";
 import { ContextMenuConfigs, ContextMenuOptionGroup } from "./contextMenuOptionGroup";
 import { selectNextFocusItem } from "./helpers/selectNextFocusItem";
 
-interface ContextMenuConfig {
+export interface ContextMenuConfig {
     target: HTMLElement,
     get options(): ContextMenuConfigs[],
 

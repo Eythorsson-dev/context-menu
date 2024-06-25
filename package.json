@@ -3,10 +3,25 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "repository": "git://github.com/eythorsson-dev/common-utils.git",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
+  "exports": {
+    ".": {
+      "import": "./dist/index.es.js",
+      "require": "./dist/index.umd.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
+    "test": "vitest",
+    "build": "tsc && vitest run && vite build",
     "preview": "vite preview"
+  },
+  "dependencies": {
+    "@eythorsson-dev/common-utils": "github:eythorsson-dev/common-utils"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.19",
@@ -14,9 +29,7 @@
     "tailwindcss": "^3.4.4",
     "typescript": "^5.2.2",
     "vite": "^5.3.1",
+    "vite-plugin-dts": "^3.9.1",
     "vitest": "^1.6.0"
-  },
-  "dependencies": {
-    "@eythorsson-dev/common-utils": "github:eythorsson-dev/common-utils"
   }
 }
