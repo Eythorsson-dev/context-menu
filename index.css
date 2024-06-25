@@ -1,0 +1,66 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.context-menu {
+    @apply bg-zinc-100 border-zinc-200/50 shadow shadow-md;
+    @apply dark:bg-zinc-800 dark:border-zinc-700/50;
+    @apply border w-60 rounded;
+    @apply py-1;
+}
+
+.context-menu-item,
+.context-menu-group {
+    @apply text-gray-700;
+    @apply dark:text-gray-100;
+    @apply outline-none;
+
+    @apply flex items-center gap-1 text-sm cursor-pointer;
+    @apply rounded;
+}
+
+.context-menu-divider {
+    @apply dark:border-zinc-700;
+    @apply my-1 py-0 !important;
+    /* @apply border-none; */
+    
+}
+
+.context-menu-item:hover,
+.context-menu-item:focus,
+.context-menu-item:focus-within,
+.context-menu-group:hover,
+.context-menu-group:focus-within,
+.context-menu-group:focus {
+    @apply bg-zinc-200/50;
+    @apply dark:bg-zinc-600/25;
+}
+
+.context-menu-item,
+.context-menu-group,
+.context-menu-divider {
+    @apply mx-1 px-1 py-0.5;
+}
+
+.context-menu-item>.icon,
+.context-menu-group>.icon {
+    @apply w-3 h-3;
+}
+
+.context-menu-item>.title,
+.context-menu-group>.title {
+    @apply flex-1;
+}
+
+.context-menu-item {
+    @apply relative;
+}
+
+.context-menu-item>.context-menu {
+    @apply absolute hidden;
+}
+
+.context-menu-item:focus>.context-menu,
+.context-menu-item:focus-within>.context-menu {
+    @apply absolute block;
+}
