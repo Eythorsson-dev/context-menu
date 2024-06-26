@@ -19,7 +19,8 @@
   ],
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
+    "build-css": "tailwindcss -o ./dist/index.css",
+    "build": "tsc && vite build && npm run build-css",
     "preview": "vite preview"
   },
   "dependencies": {
