@@ -29,7 +29,8 @@ export class ContextMenu {
         config.target
             .addEventListener("contextmenu", event => {
                 event.preventDefault();
-
+                event.stopPropagation();
+                
                 this.show(event.pageX, event.pageY)
             });
     }
