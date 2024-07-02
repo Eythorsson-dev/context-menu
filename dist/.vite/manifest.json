@@ -4,5 +4,9 @@
     "name": "index",
     "src": "src/index.ts",
     "isEntry": true
+  },
+  "style.css": {
+    "file": "style.css",
+    "src": "style.css"
   }
 }

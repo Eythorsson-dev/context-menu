@@ -1,3 +1,5 @@
+import "./index.css"
+
 import { ContextMenu, type ContextMenuConfig } from "./contextMenu";
 import { ContextMenuItem, type ContextMenuItemProps } from "./contextMenuItem";
 import { ContextMenuOption, type ContextMenuOptionConfig } from "./contextMenuOption";

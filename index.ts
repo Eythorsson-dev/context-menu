@@ -1,4 +1,3 @@
-import "./index.css"
 import { ContextMenu } from "./src/contextMenu";
 
 const contextMenu = new ContextMenu({
