@@ -112,7 +112,7 @@ class _ {
         ...t.itemByType
       }
     }), t.target.addEventListener("contextmenu", (e) => {
-      e.preventDefault(), this.show(e.pageX, e.pageY);
+      e.preventDefault(), e.stopPropagation(), this.show(e.pageX, e.pageY);
     });
   }
   show(t, e) {

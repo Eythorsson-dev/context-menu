@@ -1,7 +1,7 @@
 {
   "name": "@eythorsson-dev/context-menu",
   "private": true,
-  "version": "0.0.2",
+  "version": "0.0.3",
   "type": "module",
   "repository": "git://github.com/eythorsson-dev/common-utils.git",
   "publishConfig": {
