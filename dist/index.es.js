@@ -37,7 +37,9 @@ class A extends L {
     return s.className = "title", s.innerText = u(this, d).name, e.append(
       i,
       s
-    ), e.addEventListener("click", () => this.execute()), e.addEventListener("keydown", (o) => o.key == "Enter" && this.execute()), e;
+    ), e.addEventListener("keydown", (o) => o.key == "Enter" && this.execute()), e.addEventListener("click", (o) => {
+      o.stopPropagation(), this.execute();
+    }), e;
   }
   execute() {
     this.context.hide(), u(this, d).execute();

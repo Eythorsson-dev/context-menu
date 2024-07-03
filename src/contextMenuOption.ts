@@ -24,7 +24,7 @@ export class ContextMenuOption extends ContextMenuItem<ContextMenuOptionConfig> 
         const wrapper = document.createElement("div");
         wrapper.className = "context-menu-group";
         wrapper.tabIndex = 0;
-        
+
         const icon = document.createElement("div");
         icon.className = "icon";
         icon.append(getIcon(this.#config.icon));
@@ -38,14 +38,17 @@ export class ContextMenuOption extends ContextMenuItem<ContextMenuOptionConfig> 
             name
         );
 
-        wrapper.addEventListener("click", () => this.execute());
         wrapper.addEventListener("keydown", event => event.key == "Enter" && this.execute());
+        wrapper.addEventListener("click", event => {
+            event.stopPropagation();
+            this.execute()
+        });
 
         return wrapper;
     }
 
-    execute(){
-        this.context.hide(); 
+    execute() {
+        this.context.hide();
         this.#config.execute();
     }
 }
