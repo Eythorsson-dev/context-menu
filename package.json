@@ -23,9 +23,6 @@
     "build": "tsc && vite build",
     "preview": "vite preview"
   },
-  "dependencies": {
-    "@eythorsson-dev/common-utils": "github:eythorsson-dev/common-utils"
-  },
   "devDependencies": {
     "autoprefixer": "^10.4.19",
     "postcss": "^8.4.38",
@@ -33,5 +30,8 @@
     "typescript": "^5.2.2",
     "vite": "^5.3.1",
     "vite-plugin-dts": "^3.9.1"
+  },
+  "dependencies": {
+    "@eythorsson-dev/common-utils": "github:eythorsson-dev/common-utils"
   }
 }

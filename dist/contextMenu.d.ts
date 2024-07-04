@@ -3,7 +3,7 @@ import { ContextMenuConfigs } from './contextMenuOptionGroup';
 
 export interface ContextMenuConfig {
     target: HTMLElement;
-    get options(): ContextMenuConfigs[];
+    options: (ContextMenuConfigs[] | (() => ContextMenuConfigs[]));
     itemByType?: {
         [key: string]: CustomContextMenuItem<any>;
     };

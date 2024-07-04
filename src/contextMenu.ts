@@ -7,9 +7,13 @@ import { selectNextFocusItem } from "./helpers/selectNextFocusItem";
 
 export interface ContextMenuConfig {
     target: HTMLElement,
-    get options(): ContextMenuConfigs[],
-
+    options: (ContextMenuConfigs[] | (() => ContextMenuConfigs[])),
     itemByType?: { [key: string]: CustomContextMenuItem<any> }
+}
+
+function getOptionsValue(options: (ContextMenuConfigs[] | (() => ContextMenuConfigs[]))): ContextMenuConfigs[]{
+    if (typeof(options) == "function") return options();
+    else return options;
 }
 
 export class ContextMenu {
@@ -30,15 +34,22 @@ export class ContextMenu {
             .addEventListener("contextmenu", event => {
                 event.preventDefault();
                 event.stopPropagation();
-                
+
                 this.show(event.pageX, event.pageY)
             });
     }
 
     #container: HTMLElement | undefined
     show(x: number, y: number): void {
-        this.#container = this.createMenu(this.#config.options);
-        popupPosition(this.#container, x, y);
+        this.#container = this.createMenu(getOptionsValue(this.#config.options));
+        const popup = popupPosition(this.#container, x, y, { closeOnEsc: true, backsplachClassName: "outline-none" });
+        popup.backsplash?.focus();
+
+        // TODO: using context menu should reopen the context menu...
+        popup.backsplash?.addEventListener("contextmenu", event =>{
+            event.preventDefault();
+            popup.element.remove();
+        } )
     }
 
     hide(): void {

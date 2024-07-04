@@ -11,6 +11,14 @@ export interface ContextMenuOptionConfig {
 
     execute(): void;
 }
+
+function getValue(item: boolean | (() => boolean)) {
+    if (typeof item === 'boolean') return item;
+    else if (typeof item === 'function') return item();
+
+    return false;
+}
+
 export class ContextMenuOption extends ContextMenuItem<ContextMenuOptionConfig> {
     #config: ContextMenuOptionConfig;
 
@@ -22,7 +30,7 @@ export class ContextMenuOption extends ContextMenuItem<ContextMenuOptionConfig> 
 
     render(): HTMLElement {
         const wrapper = document.createElement("div");
-        wrapper.className = "context-menu-group";
+        wrapper.className = "context-menu-item";
         wrapper.tabIndex = 0;
 
         const icon = document.createElement("div");
@@ -38,11 +46,16 @@ export class ContextMenuOption extends ContextMenuItem<ContextMenuOptionConfig> 
             name
         );
 
-        wrapper.addEventListener("keydown", event => event.key == "Enter" && this.execute());
-        wrapper.addEventListener("click", event => {
-            event.stopPropagation();
-            this.execute()
-        });
+        if (getValue(this.#config.isDisabled ?? false) ) {
+            wrapper.classList.add("disabled");
+        }
+        else {
+            wrapper.addEventListener("keydown", event => event.key == "Enter" && this.execute());
+            wrapper.addEventListener("click", event => {
+                event.stopPropagation();
+                this.execute()
+            });
+        }
 
         return wrapper;
     }

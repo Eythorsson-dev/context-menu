@@ -55,6 +55,9 @@
 .context-menu-item {
     @apply relative;
 }
+.context-menu-item.disabled {
+    @apply cursor-not-allowed opacity-50;
+}
 
 .context-menu-item>.context-menu {
     @apply absolute hidden;
