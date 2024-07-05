@@ -3,6 +3,7 @@ import { ContextMenu } from './contextMenu';
 export interface ContextMenuItemProps<TConfig> {
     context: ContextMenu;
     get config(): TConfig;
+    beforeExecute?(): void;
 }
 export declare abstract class ContextMenuItem<TConfig> {
     #private;

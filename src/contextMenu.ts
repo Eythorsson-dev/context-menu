@@ -8,11 +8,12 @@ import { selectNextFocusItem } from "./helpers/selectNextFocusItem";
 export interface ContextMenuConfig {
     target: HTMLElement,
     options: (ContextMenuConfigs[] | (() => ContextMenuConfigs[])),
-    itemByType?: { [key: string]: CustomContextMenuItem<any> }
+    itemByType?: { [key: string]: CustomContextMenuItem<any> },
+    beforeExecute?(): void,
 }
 
-function getOptionsValue(options: (ContextMenuConfigs[] | (() => ContextMenuConfigs[]))): ContextMenuConfigs[]{
-    if (typeof(options) == "function") return options();
+function getOptionsValue(options: (ContextMenuConfigs[] | (() => ContextMenuConfigs[]))): ContextMenuConfigs[] {
+    if (typeof (options) == "function") return options();
     else return options;
 }
 
@@ -46,10 +47,10 @@ export class ContextMenu {
         popup.backsplash?.focus();
 
         // TODO: using context menu should reopen the context menu...
-        popup.backsplash?.addEventListener("contextmenu", event =>{
+        popup.backsplash?.addEventListener("contextmenu", event => {
             event.preventDefault();
             popup.element.remove();
-        } )
+        })
     }
 
     hide(): void {
@@ -61,7 +62,8 @@ export class ContextMenu {
             this.#config.itemByType![x.type],
             {
                 context: this,
-                config: x
+                config: x,
+                beforeExecute: this.#config.beforeExecute
             }
         ));
 

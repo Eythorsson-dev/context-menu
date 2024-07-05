@@ -1,8 +1,9 @@
 import { ContextMenu } from "./contextMenu";
 
 export interface ContextMenuItemProps<TConfig> {
-    context: ContextMenu
+    context: ContextMenu;
     get config(): TConfig;
+    beforeExecute?(): void;
 }
 
 export abstract class ContextMenuItem<TConfig> {

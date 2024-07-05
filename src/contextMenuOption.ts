@@ -22,10 +22,13 @@ function getValue(item: boolean | (() => boolean)) {
 export class ContextMenuOption extends ContextMenuItem<ContextMenuOptionConfig> {
     #config: ContextMenuOptionConfig;
 
+    #beforeExecute: (() => void) | undefined;
+
     constructor(props: ContextMenuItemProps<ContextMenuOptionConfig>) {
         super(props);
 
         this.#config = props.config;
+        this.#beforeExecute = props.beforeExecute;
     }
 
     render(): HTMLElement {
@@ -46,7 +49,7 @@ export class ContextMenuOption extends ContextMenuItem<ContextMenuOptionConfig> 
             name
         );
 
-        if (getValue(this.#config.isDisabled ?? false) ) {
+        if (getValue(this.#config.isDisabled ?? false)) {
             wrapper.classList.add("disabled");
         }
         else {
@@ -62,6 +65,7 @@ export class ContextMenuOption extends ContextMenuItem<ContextMenuOptionConfig> 
 
     execute() {
         this.context.hide();
+        this.#beforeExecute?.();
         this.#config.execute();
     }
 }

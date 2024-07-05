@@ -7,6 +7,7 @@ export interface ContextMenuConfig {
     itemByType?: {
         [key: string]: CustomContextMenuItem<any>;
     };
+    beforeExecute?(): void;
 }
 export declare class ContextMenu {
     #private;
