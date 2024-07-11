@@ -1,8 +1,8 @@
-import { IconTypes } from '@eythorsson-dev/common-utils';
+import { IconElement } from '@eythorsson-dev/common-utils';
 import { ContextMenuItem, ContextMenuItemProps } from './contextMenuItem';
 
 export interface ContextMenuOptionConfig {
-    get icon(): IconTypes;
+    get icon(): IconElement;
     get type(): "Option";
     get name(): string;
     isDisabled?: boolean | (() => boolean);

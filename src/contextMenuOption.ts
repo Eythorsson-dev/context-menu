@@ -1,9 +1,9 @@
-import { IconTypes, getIcon } from "@eythorsson-dev/common-utils";
+import { IconElement } from "@eythorsson-dev/common-utils";
 import { ContextMenuItem, ContextMenuItemProps } from "./contextMenuItem";
 
 
 export interface ContextMenuOptionConfig {
-    get icon(): IconTypes;
+    get icon(): IconElement;
     get type(): "Option";
     get name(): string;
 
@@ -38,7 +38,9 @@ export class ContextMenuOption extends ContextMenuItem<ContextMenuOptionConfig> 
 
         const icon = document.createElement("div");
         icon.className = "icon";
-        icon.append(getIcon(this.#config.icon));
+
+        if (this.#config.icon)
+            icon.append(this.#config.icon);
 
         const name = document.createElement("div");
         name.className = "title";

@@ -1,17 +1,17 @@
-var k = (n) => {
+var L = (n) => {
   throw TypeError(n);
 };
-var C = (n, t, e) => t.has(n) || k("Cannot " + e);
-var r = (n, t, e) => (C(n, t, "read from private field"), e ? e.call(n) : t.get(n)), d = (n, t, e) => t.has(n) ? k("Cannot add the same private member more than once") : t instanceof WeakSet ? t.add(n) : t.set(n, e), m = (n, t, e, c) => (C(n, t, "write to private field"), c ? c.call(n, e) : t.set(n, e), e);
-import { getIcon as v, popupPosition as N, popupContainer as R } from "@eythorsson-dev/common-utils";
+var k = (n, t, e) => t.has(n) || L("Cannot " + e);
+var s = (n, t, e) => (k(n, t, "read from private field"), e ? e.call(n) : t.get(n)), m = (n, t, e) => t.has(n) ? L("Cannot add the same private member more than once") : t instanceof WeakSet ? t.add(n) : t.set(n, e), p = (n, t, e, i) => (k(n, t, "write to private field"), i ? i.call(n, e) : t.set(n, e), e);
+import { getIcon as B, popupPosition as N, popupContainer as R } from "@eythorsson-dev/common-utils";
 var x;
-class L {
+class v {
   constructor(t) {
-    d(this, x);
-    m(this, x, t.context);
+    m(this, x);
+    p(this, x, t.context);
   }
   get context() {
-    return r(this, x);
+    return s(this, x);
   }
 }
 x = new WeakMap();
@@ -25,33 +25,33 @@ function P(n) {
   return typeof n == "boolean" ? n : typeof n == "function" ? n() : !1;
 }
 var l, y;
-class D extends L {
+class D extends v {
   constructor(e) {
     super(e);
-    d(this, l);
-    d(this, y);
-    m(this, l, e.config), m(this, y, e.beforeExecute);
+    m(this, l);
+    m(this, y);
+    p(this, l, e.config), p(this, y, e.beforeExecute);
   }
   render() {
     const e = document.createElement("div");
     e.className = "context-menu-item", e.tabIndex = 0;
-    const c = document.createElement("div");
-    c.className = "icon", c.append(v(r(this, l).icon));
-    const s = document.createElement("div");
-    return s.className = "title", s.innerText = r(this, l).name, e.append(
-      c,
-      s
-    ), P(r(this, l).isDisabled ?? !1) ? e.classList.add("disabled") : (e.addEventListener("keydown", (o) => o.key == "Enter" && this.execute()), e.addEventListener("click", (o) => {
+    const i = document.createElement("div");
+    i.className = "icon", s(this, l).icon && i.append(s(this, l).icon);
+    const r = document.createElement("div");
+    return r.className = "title", r.innerText = s(this, l).name, e.append(
+      i,
+      r
+    ), P(s(this, l).isDisabled ?? !1) ? e.classList.add("disabled") : (e.addEventListener("keydown", (o) => o.key == "Enter" && this.execute()), e.addEventListener("click", (o) => {
       o.stopPropagation(), this.execute();
     })), e;
   }
   execute() {
     var e;
-    this.context.hide(), (e = r(this, y)) == null || e.call(this), r(this, l).execute();
+    this.context.hide(), (e = s(this, y)) == null || e.call(this), s(this, l).execute();
   }
 }
 l = new WeakMap(), y = new WeakMap();
-class O extends L {
+class O extends v {
   constructor(t) {
     super(t);
   }
@@ -60,60 +60,60 @@ class O extends L {
     return t.className = "context-menu-divider", t;
   }
 }
-function M(n, t, e) {
-  const c = [
+function C(n, t, e) {
+  const i = [
     ...n.querySelectorAll('a, button, input, select, textarea, [tabindex]:not([tabindex="-1"])')
-  ].reduce((i, f) => (i.some((w) => w.contains(f)) || i.push(f), i), []), s = c.indexOf(t), o = e ? (s + 1) % c.length : (s - 1 + c.length) % c.length;
-  c[o].focus();
+  ].reduce((c, f) => (c.some((w) => w.contains(f)) || c.push(f), c), []), r = i.indexOf(t), o = e ? (r + 1) % i.length : (r - 1 + i.length) % i.length;
+  i[o].focus();
 }
-var p;
-class T extends L {
+var d;
+class T extends v {
   constructor(e) {
     super(e);
-    d(this, p);
-    m(this, p, e.config);
+    m(this, d);
+    p(this, d, e.config);
   }
   render() {
     const e = document.createElement("div");
     e.className = "context-menu-item", e.tabIndex = 0;
-    const c = document.createElement("div");
-    c.className = "icon", c.append(v(r(this, p).icon));
-    const s = document.createElement("div");
-    s.className = "title", s.innerText = r(this, p).name;
+    const i = document.createElement("div");
+    i.className = "icon", s(this, d).icon && i.append(s(this, d).icon);
+    const r = document.createElement("div");
+    r.className = "title", r.innerText = s(this, d).name;
     const o = document.createElement("div");
-    o.className = "icon caret", o.append(v("arrow-chevron-right")), e.append(
-      c,
-      s,
+    o.className = "icon caret", o.append(B("arrow-chevron-right")), e.append(
+      i,
+      r,
       o
     );
-    const i = this.context.createMenu(r(this, p).items);
-    return e.append(i), e.addEventListener("focus", () => {
+    const c = this.context.createMenu(s(this, d).items);
+    return e.append(c), e.addEventListener("focus", () => {
       let a = f(), u = w();
-      i.style.setProperty(a ? "bottom" : "top", "0"), i.style.removeProperty(a ? "top" : "bottom"), i.style.setProperty(u ? "right" : "left", "100%"), i.style.removeProperty(u ? "left" : "right");
+      c.style.setProperty(a ? "bottom" : "top", "0"), c.style.removeProperty(a ? "top" : "bottom"), c.style.setProperty(u ? "right" : "left", "100%"), c.style.removeProperty(u ? "left" : "right");
     }), e.addEventListener("keydown", (a) => {
       const u = w();
-      a.key == "ArrowLeft" && u || a.key == "ArrowRight" && u == !1 ? M(i, i, !0) : (a.key == "ArrowLeft" && u == !1 || a.key == "ArrowRight" && u) && e.focus();
+      a.key == "ArrowLeft" && u || a.key == "ArrowRight" && u == !1 ? C(c, c, !0) : (a.key == "ArrowLeft" && u == !1 || a.key == "ArrowRight" && u) && e.focus();
     }), e;
     function f() {
-      const a = i.getBoundingClientRect(), u = e.getBoundingClientRect(), E = u.bottom - a.height, b = window.innerHeight - u.top - a.height;
+      const a = c.getBoundingClientRect(), u = e.getBoundingClientRect(), E = u.bottom - a.height, b = window.innerHeight - u.top - a.height;
       return E >= 0 && b < 0;
     }
     function w() {
-      const a = i.getBoundingClientRect(), u = e.getBoundingClientRect(), E = u.left - a.width, b = window.innerWidth - u.right - a.width;
+      const a = c.getBoundingClientRect(), u = e.getBoundingClientRect(), E = u.left - a.width, b = window.innerWidth - u.right - a.width;
       return E >= 0 && b < 0;
     }
   }
 }
-p = new WeakMap();
+d = new WeakMap();
 function _(n) {
   return typeof n == "function" ? n() : n;
 }
 var h, g;
 class q {
   constructor(t) {
-    d(this, h);
-    d(this, g);
-    m(this, h, {
+    m(this, h);
+    m(this, g);
+    p(this, h, {
       ...t,
       itemByType: {
         Option: D,
@@ -126,31 +126,31 @@ class q {
     });
   }
   show(t, e) {
-    var s, o;
-    m(this, g, this.createMenu(_(r(this, h).options)));
-    const c = N(r(this, g), t, e, { closeOnEsc: !0, backsplachClassName: "outline-none" });
-    (s = c.backsplash) == null || s.focus(), (o = c.backsplash) == null || o.addEventListener("contextmenu", (i) => {
-      i.preventDefault(), c.element.remove();
+    var r, o;
+    p(this, g, this.createMenu(_(s(this, h).options)));
+    const i = N(s(this, g), t, e, { closeOnEsc: !0, backsplachClassName: "outline-none" });
+    (r = i.backsplash) == null || r.focus(), (o = i.backsplash) == null || o.addEventListener("contextmenu", (c) => {
+      c.preventDefault(), i.element.remove();
     });
   }
   hide() {
     var t;
-    (t = r(this, g)) == null || t.remove();
+    (t = s(this, g)) == null || t.remove();
   }
   createMenu(t) {
     const e = t.map((o) => A(
-      r(this, h).itemByType[o.type],
+      s(this, h).itemByType[o.type],
       {
         context: this,
         config: o,
-        beforeExecute: r(this, h).beforeExecute
+        beforeExecute: s(this, h).beforeExecute
       }
-    )), c = R(e.map((o) => o.render()), "context-menu");
-    return document.addEventListener("keydown", (o) => s(o)), c.addEventListener("keydown", (o) => s(o)), c;
-    function s(o) {
+    )), i = R(e.map((o) => o.render()), "context-menu");
+    return document.addEventListener("keydown", (o) => r(o)), i.addEventListener("keydown", (o) => r(o)), i;
+    function r(o) {
       if (o.key == "ArrowDown" || o.key == "ArrowUp") {
-        const i = o.key == "ArrowDown", f = document.activeElement;
-        M(c, f, i), o.stopPropagation();
+        const c = o.key == "ArrowDown", f = document.activeElement;
+        C(i, f, c), o.stopPropagation();
       }
     }
   }
@@ -158,7 +158,7 @@ class q {
 h = new WeakMap(), g = new WeakMap();
 export {
   q as ContextMenu,
-  L as ContextMenuItem,
+  v as ContextMenuItem,
   D as ContextMenuOption,
   T as ContextMenuOptionGroup
 };

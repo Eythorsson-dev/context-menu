@@ -1,4 +1,4 @@
-import { IconTypes, getIcon } from "@eythorsson-dev/common-utils";
+import { IconElement, getIcon } from "@eythorsson-dev/common-utils";
 import { ContextMenuItem, ContextMenuItemProps } from "./contextMenuItem";
 import { ContextMenuDividerConfig } from "./contextMenuDivider";
 import { ContextMenuOptionConfig } from "./contextMenuOption";
@@ -7,7 +7,7 @@ import { selectNextFocusItem } from "./helpers/selectNextFocusItem";
 export type ContextMenuConfigs = ContextMenuOptionConfig | ContextMenuDividerConfig | ContextMenuOptionGroupConfig
 
 export interface ContextMenuOptionGroupConfig {
-    get icon(): IconTypes;
+    get icon(): IconElement;
     get type(): "Group";
     get name(): string;
 
@@ -31,7 +31,9 @@ export class ContextMenuOptionGroup extends ContextMenuItem<ContextMenuOptionGro
 
         const icon = document.createElement("div");
         icon.className = "icon";
-        icon.append(getIcon(this.#config.icon));
+        
+        if (this.#config.icon)
+            icon.append(this.#config.icon);
 
         const name = document.createElement("div");
         name.className = "title";
@@ -73,11 +75,11 @@ export class ContextMenuOptionGroup extends ContextMenuItem<ContextMenuOptionGro
                 }
                 // focus on parent
                 else if (event.key == "ArrowLeft" && _alignLeft == false
-                || event.key == "ArrowRight" && _alignLeft) {
-                    
+                    || event.key == "ArrowRight" && _alignLeft) {
+
                     wrapper.focus();
                 }
-                
+
             })
         return wrapper;
 
